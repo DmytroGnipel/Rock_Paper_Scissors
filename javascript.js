@@ -39,6 +39,9 @@ if (result == 'You Lose! Paper beats Rock' || result == 'You Lose! Scissors beat
 else if (result == 'You Win! Paper beats Rock' || result == 'You Win! Scissors beats paper' || result == 'You Win! Rock beats scissors') {
     amountusersWin++}
 else if (result == 'Draw!') {
-    i--};
-console.log(`TOTAL SCORE computer ${amountComputersWin} : you ${amountusersWin}. For total win you must go out 5 rounds. Good luck! ${ComputerChoice}`)
-                         }
+    i--}
+//game ends wehn comp or user had 3 wins
+console.log(`TOTAL SCORE computer ${amountComputersWin} : you ${amountusersWin}. For total win you must go out 5 rounds. Good luck! ${ComputerChoice}`);
+if (amountComputersWin == 3 || amountusersWin == 3) {
+    i = 4}
+    }
