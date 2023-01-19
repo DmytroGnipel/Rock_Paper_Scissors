@@ -1,21 +1,18 @@
-//function of single round
-function singleround(playerSelection, computerSelection) {
-    if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'paper') {
-     return 'You Lose! Paper beats Rock'}
-    else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'rock') {
-         return 'You Win! Paper beats Rock'}
-     else if (playerSelection.toLowerCase() == 'paper' && computerSelection == 'scissors') {
-         return 'You Lose! Scissors beats paper'}
-     else if (playerSelection.toLowerCase() === 'scissors' && computerSelection == 'paper') {
-         return 'You Win! Scissors beats paper'}
-     else if (playerSelection.toLowerCase() == 'scissors' && computerSelection == 'rock') {
-         return 'You Lose! Rock beats scissors'}
-     else if (playerSelection.toLowerCase() == 'rock' && computerSelection == 'scissors') {
-         return 'You Win! Rock beats scissors'}
-     else if (playerSelection.toLowerCase() == computerSelection) {
-         return 'Draw!'}
-     }
-//get random variable or ComputerChoice
+const body = document.querySelector('body')
+const div = document.querySelector('div')
+const buttonPaper = document.createElement('button')
+const buttonRock = document.createElement('button')
+const buttonScissors = document.createElement('button')
+buttonPaper.textContent = 'Paper'
+buttonRock.textContent = 'Rock'
+buttonScissors.textContent = 'Scissors'
+body.insertAdjacentElement ('afterbegin', buttonRock)
+body.insertAdjacentElement ('afterbegin', buttonPaper)
+body.insertAdjacentElement ('afterbegin', buttonScissors)
+let sumOfUserWins = 0
+let sumOfCompWins = 0
+let sumOfDraws = 0
+//get ComputerChoice
 function getComputerChoice() { 
  randominteger = Math.floor(Math.random() * 9);
      if (randominteger <= 2) {
@@ -25,23 +22,68 @@ function getComputerChoice() {
      else {
          return 'scissors'}
          }
-let amountComputersWin = 0; // for count and display computers win
-let amountusersWin = 0; // for count and display users win
-let result; // get winner
-let ComputerChoice; // for checking computers Choice in console
-//loop of game
-for (let i = 0; i < 5; i++) {
-let answer = prompt('please make your choise' , '');
-ComputerChoice = getComputerChoice()
-result = singleround(answer, ComputerChoice);
-if (result == 'You Lose! Paper beats Rock' || result == 'You Lose! Scissors beats paper' || result == 'You Lose! Rock beats scissors') {
-    amountComputersWin++}
-else if (result == 'You Win! Paper beats Rock' || result == 'You Win! Scissors beats paper' || result == 'You Win! Rock beats scissors') {
-    amountusersWin++}
-else if (result == 'Draw!') {
-    i--}
-//game ends wehn comp or user had 3 wins
-console.log(`TOTAL SCORE computer ${amountComputersWin} : you ${amountusersWin}. For total win you must go out 5 rounds. Good luck! ${ComputerChoice}`);
-if (amountComputersWin == 3 || amountusersWin == 3) {
-    i = 4}
+//when click on button Rock
+buttonRock.addEventListener('click', function () {
+    let computerChoice = getComputerChoice()
+    if (computerChoice === 'rock')
+    sumOfDraws++
+    else if (computerChoice === 'scissors')
+    sumOfUserWins++
+    else if (computerChoice === 'paper')
+    sumOfCompWins++
+    console.log(computerChoice)
+    console.log(sumOfUserWins, sumOfCompWins, sumOfDraws)
+    div.textContent = `Total score | You ${sumOfUserWins} : ${sumOfCompWins} Computer | amount of draw ${sumOfDraws}`
+    getWinner(sumOfUserWins, sumOfCompWins)
+})
+//when click on button Paper
+buttonPaper.addEventListener('click', function () {
+    let computerChoice = getComputerChoice()
+    if (computerChoice === 'paper') 
+    sumOfDraws++
+    else if (computerChoice === 'rock')
+    sumOfUserWins++
+    else if (computerChoice === 'scissors')
+    sumOfCompWins++
+    console.log(computerChoice)
+    console.log(sumOfUserWins, sumOfCompWins, sumOfDraws)
+    div.textContent = `Total score | You ${sumOfUserWins} : ${sumOfCompWins} Computer | amount of draw ${sumOfDraws}`
+    getWinner(sumOfUserWins, sumOfCompWins)
+})
+//when click on button Scissors
+buttonScissors.addEventListener('click', function () {
+    let computerChoice = getComputerChoice()
+    if (computerChoice === 'scissors') 
+    sumOfDraws++
+    else if (computerChoice === 'paper')
+    sumOfUserWins++
+    else if (computerChoice === 'rock')
+    sumOfCompWins++
+    console.log(computerChoice)
+    div.textContent = `Total score | You ${sumOfUserWins} : ${sumOfCompWins} Computer | amount of draw ${sumOfDraws}`
+    getWinner(sumOfUserWins, sumOfCompWins)
+})
+//results
+console.log(sumOfUserWins, sumOfCompWins, sumOfDraws)
+
+function getWinner(sumOfUserWins, sumOfCompWins) {
+    if (sumOfUserWins === 5) {
+div.textContent = `YOU WIN!!! | You ${sumOfUserWins} : ${sumOfCompWins} Computer | amount of draw ${sumOfDraws}`
+  }
+    else if (sumOfCompWins === 5) {
+div.textContent = `YOU LOSE!!! | Total score | You ${sumOfUserWins} : ${sumOfCompWins} Computer | amount of draw ${sumOfDraws}`
+      }
+    if (sumOfUserWins === 5 || sumOfCompWins === 5){
+        buttonPaper.style.display = 'none'
+        buttonRock.style.display = 'none'
+        buttonScissors.style.display = 'none'
     }
+}
+
+
+/*
+
+
+
+
+*/
