@@ -79,11 +79,3 @@ div.textContent = `YOU LOSE!!! | Total score | You ${sumOfUserWins} : ${sumOfCom
         buttonScissors.style.display = 'none'
     }
 }
-
-
-/*
-
-
-
-
-*/
